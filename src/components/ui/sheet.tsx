@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 import * as React from "react";
+import { createPortal } from "react-dom";
 
 interface SheetContextType {
   open: boolean;
@@ -84,7 +85,12 @@ export function SheetContent({
 }: React.HTMLAttributes<HTMLDivElement> & {
   side?: "top" | "bottom" | "left" | "right";
 }) {
+  const [mounted, setMounted] = React.useState(false);
   const { open, setOpen } = useSheet();
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   React.useEffect(() => {
     if (open) {
@@ -97,27 +103,27 @@ export function SheetContent({
     };
   }, [open]);
 
-  if (!open) return null;
+  if (!open || !mounted) return null;
 
   const sideClasses = {
     top: "inset-x-0 top-0 border-b",
     bottom: "inset-x-0 bottom-0 border-t",
-    left: "inset-y-0 left-0 h-full w-3/4 max-w-sm border-r",
-    right: "inset-y-0 right-0 h-full w-3/4 max-w-sm border-l",
+    left: "inset-y-0 left-0 h-screen h-dvh w-4/5 max-w-sm border-r",
+    right: "inset-y-0 right-0 h-screen h-dvh w-4/5 max-w-sm border-l",
   };
 
-  return (
+  const portalContent = (
     <div className="fixed inset-0 z-50 flex">
       <button
         type="button"
         aria-label="Close sheet overlay"
-        className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity cursor-default"
+        className="fixed inset-0 h-full w-full bg-black/60 backdrop-blur-xs transition-opacity cursor-default"
         onClick={() => setOpen(false)}
       />
       <section
         aria-modal="true"
         className={cn(
-          "fixed z-50 flex flex-col bg-white p-6 shadow-2xl transition ease-in-out dark:bg-slate-900 border-slate-200 dark:border-slate-800",
+          "fixed z-50 flex h-screen h-dvh max-h-screen flex-col overflow-y-auto bg-white p-6 shadow-2xl transition ease-in-out dark:bg-slate-900 border-slate-200 dark:border-slate-800",
           sideClasses[side],
           className,
         )}
@@ -135,6 +141,8 @@ export function SheetContent({
       </section>
     </div>
   );
+
+  return createPortal(portalContent, document.body);
 }
 
 export function SheetHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
