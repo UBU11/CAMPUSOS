@@ -5,6 +5,7 @@ import { LiveListingsGrid } from "@/components/marketplace/live-listings-grid";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export function HomeContainer() {
   return (
@@ -38,10 +39,14 @@ export function HomeContainer() {
             </Link>
           </div>
 
-          <FilterBar />
+          <Suspense fallback={<div className="h-10 w-full animate-pulse rounded-md bg-muted" />}>
+            <FilterBar />
+          </Suspense>
 
           <div className="mt-8">
-            <LiveListingsGrid />
+            <Suspense fallback={<div className="h-48 w-full animate-pulse rounded-md bg-muted" />}>
+              <LiveListingsGrid />
+            </Suspense>
           </div>
         </section>
       </div>
