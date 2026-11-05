@@ -1,4 +1,4 @@
-import { FeaturesBento } from "@/components/home/features-bento";
+import { FeaturesSection } from "@/components/home/features/features-section";
 import { HeroSection } from "@/components/home/hero-section";
 import { FilterBar } from "@/components/marketplace/filter-bar";
 import { LiveListingsGrid } from "@/components/marketplace/live-listings-grid";
@@ -11,10 +11,10 @@ export function HomeContainer() {
     <div className="w-full pb-16 sm:pb-24">
       <HeroSection />
 
-      <div className="container mx-auto mt-10 px-4 sm:px-6">
-        <FeaturesBento />
+      <div className="container mx-auto mt-6 px-4 sm:px-6">
+        <FeaturesSection />
 
-        <section className="mt-8 rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-8 shadow-xs dark:border-slate-800/90 dark:bg-slate-900">
+        <section className="mt-6 rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-8 shadow-xs dark:border-slate-800/90 dark:bg-slate-900">
           <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div>
               <div className="flex items-center gap-2">
