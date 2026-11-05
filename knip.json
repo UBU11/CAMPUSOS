@@ -1,0 +1,19 @@
+{
+  "$schema": "https://unpkg.com/knip@5/overview/configuration-types.json",
+  "entry": [
+    "src/app/**/page.tsx",
+    "src/app/**/layout.tsx",
+    "src/app/**/route.ts",
+    "src/middleware.ts",
+    "src/db/schema/index.ts",
+    "src/components/ui/**/*.{ts,tsx}",
+    "open-next.config.ts",
+    "drizzle.config.ts"
+  ],
+  "project": ["src/**/*.{ts,tsx}", "*.ts"],
+  "ignoreDependencies": [
+    "@opennextjs/cloudflare",
+    "@tailwindcss/postcss",
+    "postcss"
+  ]
+}
