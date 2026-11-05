@@ -70,7 +70,7 @@ Run these exact commands from the repository root:
 
 1. **Cloudflare Workers 10 ms CPU Limit & Bundle Hygiene**:
 
-   * Keep `src/middleware.ts` ultra-lightweight (Supabase session cookie refresh and route protection only).
+   * Keep `src/proxy.ts` (formerly `middleware.ts`) ultra-lightweight (Supabase session cookie refresh and route protection only).
 
    * Never import heavy Node-only libraries (`sharp`, `@aws-sdk/*`, `bcrypt`, `puppeteer`) in Worker routes or Server Actions. Use Web Crypto APIs and `aws4fetch`.
 
