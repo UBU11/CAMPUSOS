@@ -54,12 +54,12 @@ export function Hero17({
   return (
     <section
       className={cn(
-        "relative isolate min-h-[600px] sm:min-h-[680px] overflow-hidden rounded-3xl border border-slate-200/80 bg-slate-900 text-slate-950 antialiased shadow-sm dark:border-slate-800/80 dark:text-white",
+        "relative isolate min-h-[600px] sm:min-h-[720px] w-full overflow-hidden text-slate-950 antialiased dark:text-white",
         className,
       )}
     >
       <motion.div
-        className="relative flex h-full min-h-[600px] sm:min-h-[680px] w-full flex-col overflow-hidden"
+        className="relative flex h-full min-h-[600px] sm:min-h-[720px] w-full flex-col overflow-hidden"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -69,10 +69,10 @@ export function Hero17({
           variants={heroImageVariants}
           src={backgroundImage}
           alt="Campus backdrop"
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-30 dark:opacity-20"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-slate-50/95 dark:from-slate-950/90 dark:via-slate-950/80 dark:to-slate-950/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60 dark:from-slate-950/60 dark:via-transparent dark:to-slate-950/70" />
 
         {showNav && (
           <motion.nav

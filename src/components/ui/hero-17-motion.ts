@@ -38,11 +38,10 @@ export const heroStaggerWordsVariants: Variants = {
 };
 
 export const heroImageVariants: Variants = {
-  hidden: { opacity: 0, scale: 1.15, filter: "blur(15px)" },
+  hidden: { opacity: 0, scale: 1.05 },
   visible: {
     opacity: 1,
     scale: 1,
-    filter: "blur(0px)",
     transition: { type: "spring", damping: 25, stiffness: 30 },
   },
 };
