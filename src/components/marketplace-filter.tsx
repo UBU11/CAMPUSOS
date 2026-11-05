@@ -1,8 +1,8 @@
 "use client";
 
-import { useQueryState } from "nuqs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useQueryState } from "nuqs";
 
 const CATEGORIES = [
   "All",
@@ -11,21 +11,21 @@ const CATEGORIES = [
   "Electronics",
   "Calculators",
   "Bicycles",
-  "Stationery"
+  "Stationery",
 ] as const;
 
 export function MarketplaceFilter() {
   const [search, setSearch] = useQueryState("search", {
     defaultValue: "",
-    shallow: false
+    shallow: false,
   });
   const [category, setCategory] = useQueryState("category", {
     defaultValue: "All",
-    shallow: false
+    shallow: false,
   });
   const [listingType, setListingType] = useQueryState("listingType", {
     defaultValue: "all",
-    shallow: false
+    shallow: false,
   });
 
   return (

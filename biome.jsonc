@@ -7,13 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [
-      ".next/**",
-      ".open-next/**",
-      "node_modules/**",
-      "dist/**",
-      "src/db/migrations/**"
-    ]
+    "ignore": [".next/**", ".open-next/**", "node_modules/**", "dist/**", "src/db/migrations/**"]
   },
   "formatter": {
     "enabled": true,

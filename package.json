@@ -50,7 +50,5 @@
     "typescript": "^5.8.2",
     "wrangler": "^3.111.0"
   },
-  "trustedDependencies": [
-    "@biomejs/biome"
-  ]
+  "trustedDependencies": ["@biomejs/biome"]
 }

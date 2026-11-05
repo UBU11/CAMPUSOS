@@ -5,11 +5,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "CampusOS — Campus Student Marketplace, Internships & Talent",
   description:
-    "Campus-exclusive student marketplace, verified internship portal, and student talent pool."
+    "Campus-exclusive student marketplace, verified internship portal, and student talent pool.",
 };
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {

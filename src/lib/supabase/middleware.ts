@@ -1,6 +1,6 @@
+import { env } from "@/env";
 import { type CookieOptions, createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
-import { env } from "@/env";
 
 type CookieToSet = {
   name: string;
@@ -11,8 +11,8 @@ type CookieToSet = {
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({
     request: {
-      headers: request.headers
-    }
+      headers: request.headers,
+    },
   });
 
   const supabase = createServerClient(
@@ -28,18 +28,18 @@ export async function updateSession(request: NextRequest) {
             request.cookies.set(name, value);
           }
           response = NextResponse.next({
-            request
+            request,
           });
           for (const { name, value, options } of cookiesToSet) {
             response.cookies.set(name, value, options);
           }
-        }
-      }
-    }
+        },
+      },
+    },
   );
 
   const {
-    data: { user }
+    data: { user },
   } = await supabase.auth.getUser();
 
   const isProtectedRoute =

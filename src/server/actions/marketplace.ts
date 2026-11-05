@@ -1,21 +1,18 @@
 "use server";
 
+import { db } from "@/db";
+import { insertMarketplaceListingSchema, marketplaceListings } from "@/db/schema/marketplace";
+import { authenticatedActionClient } from "@/lib/safe-action";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { db } from "@/db";
-import {
-  insertMarketplaceListingSchema,
-  marketplaceListings
-} from "@/db/schema/marketplace";
-import { authenticatedActionClient } from "@/lib/safe-action";
 
 const createListingInputSchema = insertMarketplaceListingSchema
   .omit({
     id: true,
     sellerId: true,
     createdAt: true,
-    updatedAt: true
+    updatedAt: true,
   })
   .refine(
     (data) => {
@@ -26,8 +23,8 @@ const createListingInputSchema = insertMarketplaceListingSchema
     },
     {
       message: "Sale price in INR is required for sell or both listing types",
-      path: ["sellPriceInr"]
-    }
+      path: ["sellPriceInr"],
+    },
   )
   .refine(
     (data) => {
@@ -38,8 +35,8 @@ const createListingInputSchema = insertMarketplaceListingSchema
     },
     {
       message: "Daily rent in INR is required for lend or both listing types",
-      path: ["dailyRentInr"]
-    }
+      path: ["dailyRentInr"],
+    },
   );
 
 export const createMarketplaceListingAction = authenticatedActionClient
@@ -49,7 +46,7 @@ export const createMarketplaceListingAction = authenticatedActionClient
       .insert(marketplaceListings)
       .values({
         ...parsedInput,
-        sellerId: ctx.user.id
+        sellerId: ctx.user.id,
       })
       .returning();
 
@@ -61,7 +58,7 @@ export const createMarketplaceListingAction = authenticatedActionClient
 
 const updateStatusInputSchema = z.object({
   listingId: z.string().uuid(),
-  status: z.enum(["active", "sold", "rented", "archived"])
+  status: z.enum(["active", "sold", "rented", "archived"]),
 });
 
 export const updateMarketplaceListingStatusAction = authenticatedActionClient
@@ -71,13 +68,13 @@ export const updateMarketplaceListingStatusAction = authenticatedActionClient
       .update(marketplaceListings)
       .set({
         status: parsedInput.status,
-        updatedAt: new Date()
+        updatedAt: new Date(),
       })
       .where(
         and(
           eq(marketplaceListings.id, parsedInput.listingId),
-          eq(marketplaceListings.sellerId, ctx.user.id)
-        )
+          eq(marketplaceListings.sellerId, ctx.user.id),
+        ),
       )
       .returning();
 

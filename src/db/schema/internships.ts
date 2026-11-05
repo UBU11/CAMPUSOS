@@ -1,11 +1,20 @@
-import { boolean, integer, jsonb, pgEnum, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  integer,
+  jsonb,
+  pgEnum,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+} from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { users } from "./users";
 
 export const locationTypeEnum = pgEnum("internship_location_type", [
   "remote",
   "on_campus",
-  "hybrid"
+  "hybrid",
 ]);
 
 export const internships = pgTable("internships", {
@@ -22,7 +31,7 @@ export const internships = pgTable("internships", {
   locationType: locationTypeEnum("location_type").default("on_campus").notNull(),
   isActive: boolean("is_active").default(true).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull()
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
 export const insertInternshipSchema = createInsertSchema(internships);

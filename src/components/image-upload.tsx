@@ -1,10 +1,10 @@
 "use client";
 
-import imageCompression from "browser-image-compression";
-import { Upload, Loader2 } from "lucide-react";
-import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { getPresignedUploadUrlAction } from "@/server/actions/r2";
+import imageCompression from "browser-image-compression";
+import { Loader2, Upload } from "lucide-react";
+import * as React from "react";
 
 interface ImageUploadProps {
   onUploadSuccess: (payload: { publicUrl: string; key: string }) => void;
@@ -30,18 +30,16 @@ export function ImageUpload({ onUploadSuccess, className }: ImageUploadProps) {
         maxSizeMB: 0.15,
         maxWidthOrHeight: 1200,
         useWebWorker: true,
-        fileType: "image/webp"
+        fileType: "image/webp",
       });
 
       const presignResult = await getPresignedUploadUrlAction({
         fileName: file.name.replace(/\.[^/.]+$/, ".webp"),
-        contentType: "image/webp"
+        contentType: "image/webp",
       });
 
       if (!presignResult?.data) {
-        throw new Error(
-          presignResult?.serverError ?? "Failed to acquire presigned upload URL"
-        );
+        throw new Error(presignResult?.serverError ?? "Failed to acquire presigned upload URL");
       }
 
       const { uploadUrl, publicUrl, key } = presignResult.data;
@@ -50,8 +48,8 @@ export function ImageUpload({ onUploadSuccess, className }: ImageUploadProps) {
         method: "PUT",
         body: compressedFile,
         headers: {
-          "Content-Type": "image/webp"
-        }
+          "Content-Type": "image/webp",
+        },
       });
 
       if (!uploadResponse.ok) {
@@ -60,9 +58,7 @@ export function ImageUpload({ onUploadSuccess, className }: ImageUploadProps) {
 
       onUploadSuccess({ publicUrl, key });
     } catch (uploadError) {
-      setError(
-        uploadError instanceof Error ? uploadError.message : "Upload failed"
-      );
+      setError(uploadError instanceof Error ? uploadError.message : "Upload failed");
     } finally {
       setIsUploading(false);
       if (inputRef.current) {

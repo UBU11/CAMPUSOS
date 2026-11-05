@@ -17,7 +17,7 @@ export const talentProfiles = pgTable("talent_profiles", {
   resumeR2Key: text("resume_r2_key"),
   isAvailable: boolean("is_available").default(true).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull()
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
 export const insertTalentProfileSchema = createInsertSchema(talentProfiles);

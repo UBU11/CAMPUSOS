@@ -1,15 +1,9 @@
-import { ArrowRight, Briefcase, GraduationCap, ShoppingBag } from "lucide-react";
-import Link from "next/link";
 import { MarketplaceFilter } from "@/components/marketplace-filter";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowRight, Briefcase, GraduationCap, ShoppingBag } from "lucide-react";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -42,8 +36,8 @@ export default function HomePage() {
             The Operating System for Campus Life
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-            Buy, sell, and lend campus essentials, discover verified internships,
-            and showcase your student talent within your verified college community.
+            Buy, sell, and lend campus essentials, discover verified internships, and showcase your
+            student talent within your verified college community.
           </p>
         </section>
 
@@ -67,7 +61,8 @@ export default function HomePage() {
               </div>
               <CardTitle>Internship Portal</CardTitle>
               <CardDescription>
-                Explore opportunities from verified industry partners curated specifically for students.
+                Explore opportunities from verified industry partners curated specifically for
+                students.
               </CardDescription>
             </CardHeader>
           </Card>

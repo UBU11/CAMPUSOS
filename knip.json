@@ -4,16 +4,12 @@
     "src/app/**/page.tsx",
     "src/app/**/layout.tsx",
     "src/app/**/route.ts",
-    "src/middleware.ts",
-    "src/db/schema/index.ts",
-    "src/components/ui/**/*.{ts,tsx}",
-    "open-next.config.ts",
-    "drizzle.config.ts"
+    "src/server/actions/**/*.{ts,tsx}",
+    "src/components/**/*.{ts,tsx}",
+    "src/db/**/*.{ts,tsx}",
+    "src/lib/**/*.{ts,tsx}",
+    "open-next.config.ts"
   ],
   "project": ["src/**/*.{ts,tsx}", "*.ts"],
-  "ignoreDependencies": [
-    "@opennextjs/cloudflare",
-    "@tailwindcss/postcss",
-    "postcss"
-  ]
+  "ignoreDependencies": ["react-hook-form", "tailwindcss"]
 }

@@ -15,9 +15,9 @@ export const getOAuthSignInUrlAction = actionClient.action(async () => {
       redirectTo: redirectUrl,
       queryParams: {
         hd: env.NEXT_PUBLIC_COLLEGE_DOMAIN,
-        prompt: "select_account"
-      }
-    }
+        prompt: "select_account",
+      },
+    },
   });
 
   if (error) {

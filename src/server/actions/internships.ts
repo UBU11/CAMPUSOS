@@ -1,15 +1,15 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { insertInternshipSchema, internships } from "@/db/schema/internships";
 import { authenticatedActionClient } from "@/lib/safe-action";
+import { revalidatePath } from "next/cache";
 
 const createInternshipInputSchema = insertInternshipSchema.omit({
   id: true,
   companyId: true,
   createdAt: true,
-  updatedAt: true
+  updatedAt: true,
 });
 
 export const createInternshipAction = authenticatedActionClient
@@ -21,7 +21,7 @@ export const createInternshipAction = authenticatedActionClient
 
     if (!ctx.user.isVerified) {
       throw new Error(
-        "Company account verification pending. An admin must verify your account before publishing."
+        "Company account verification pending. An admin must verify your account before publishing.",
       );
     }
 
@@ -29,7 +29,7 @@ export const createInternshipAction = authenticatedActionClient
       .insert(internships)
       .values({
         ...parsedInput,
-        companyId: ctx.user.id
+        companyId: ctx.user.id,
       })
       .returning();
 

@@ -1,16 +1,16 @@
 "use server";
 
-import { eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { insertTalentProfileSchema, talentProfiles } from "@/db/schema/talent";
 import { authenticatedActionClient } from "@/lib/safe-action";
+import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 const upsertTalentInputSchema = insertTalentProfileSchema.omit({
   id: true,
   studentId: true,
   createdAt: true,
-  updatedAt: true
+  updatedAt: true,
 });
 
 export const upsertTalentProfileAction = authenticatedActionClient
@@ -31,7 +31,7 @@ export const upsertTalentProfileAction = authenticatedActionClient
         .update(talentProfiles)
         .set({
           ...parsedInput,
-          updatedAt: new Date()
+          updatedAt: new Date(),
         })
         .where(eq(talentProfiles.id, existing.id))
         .returning();
@@ -45,7 +45,7 @@ export const upsertTalentProfileAction = authenticatedActionClient
       .insert(talentProfiles)
       .values({
         ...parsedInput,
-        studentId: ctx.user.id
+        studentId: ctx.user.id,
       })
       .returning();
 

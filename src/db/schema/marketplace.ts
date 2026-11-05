@@ -3,12 +3,7 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { users } from "./users";
 
 export const listingTypeEnum = pgEnum("listing_type", ["sell", "lend", "both"]);
-export const listingStatusEnum = pgEnum("listing_status", [
-  "active",
-  "sold",
-  "rented",
-  "archived"
-]);
+export const listingStatusEnum = pgEnum("listing_status", ["active", "sold", "rented", "archived"]);
 
 export const marketplaceListings = pgTable("marketplace_listings", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -25,7 +20,7 @@ export const marketplaceListings = pgTable("marketplace_listings", {
   images: jsonb("images").$type<string[]>().default([]).notNull(),
   status: listingStatusEnum("status").default("active").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull()
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
 export const insertMarketplaceListingSchema = createInsertSchema(marketplaceListings);
