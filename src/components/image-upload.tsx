@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { getPresignedUploadUrlAction } from "@/server/actions/r2";
+import { api } from "@/lib/api-client";
 import imageCompression from "browser-image-compression";
 import { Loader2, Upload } from "lucide-react";
 import * as React from "react";
@@ -33,16 +33,18 @@ export function ImageUpload({ onUploadSuccess, className }: ImageUploadProps) {
         fileType: "image/webp",
       });
 
-      const presignResult = await getPresignedUploadUrlAction({
-        fileName: file.name.replace(/\.[^/.]+$/, ".webp"),
-        contentType: "image/webp",
+      const response = await api.storage.presign.$post({
+        json: {
+          fileName: file.name.replace(/\.[^/.]+$/, ".webp"),
+          contentType: "image/webp",
+        },
       });
 
-      if (!presignResult?.data) {
-        throw new Error(presignResult?.serverError ?? "Failed to acquire presigned upload URL");
+      if (!response.ok) {
+        throw new Error("Failed to acquire presigned upload URL from server");
       }
 
-      const { uploadUrl, publicUrl, key } = presignResult.data;
+      const { uploadUrl, publicUrl, key } = await response.json();
 
       const uploadResponse = await fetch(uploadUrl, {
         method: "PUT",

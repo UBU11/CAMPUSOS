@@ -26,3 +26,6 @@ bun.lockb
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# docs
+/docs 

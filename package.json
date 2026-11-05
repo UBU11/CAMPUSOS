@@ -17,6 +17,7 @@
     "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
+    "@hono/zod-validator": "^0.9.1",
     "@opennextjs/cloudflare": "^1.20.16",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.49.1",
@@ -26,6 +27,7 @@
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.1",
     "drizzle-zod": "^0.7.1",
+    "hono": "^4.13.16",
     "lucide-react": "^1.16.0",
     "next": "^16.0.0",
     "next-safe-action": "^7.10.4",

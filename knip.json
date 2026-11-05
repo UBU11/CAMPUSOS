@@ -5,6 +5,7 @@
     "src/app/**/layout.tsx",
     "src/app/**/route.ts",
     "src/server/actions/**/*.{ts,tsx}",
+    "src/server/middleware/**/*.{ts,tsx}",
     "src/components/**/*.{ts,tsx}",
     "src/db/**/*.{ts,tsx}",
     "src/lib/**/*.{ts,tsx}",
