@@ -27,7 +27,6 @@ export interface Hero17Props {
   loginHref?: string;
   signupLabel?: string;
   signupHref?: string;
-  scrollLabel?: string;
   backgroundImage?: string;
   className?: string;
   children?: ReactNode;

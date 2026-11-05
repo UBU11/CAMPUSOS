@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/hero-17-motion";
 import { cn } from "@/lib/utils";
 import type { Hero17Props, HeroNavLink } from "@/types/hero";
-import { ArrowDown, ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 
@@ -43,7 +43,6 @@ export function Hero17({
   loginHref = "/auth",
   signupLabel = "Get Started",
   signupHref = "/auth",
-  scrollLabel = "Scroll to Explore",
   backgroundImage = "https://assets.watermelon.sh/hero-17-bg.avif",
   className,
   children,
@@ -115,12 +114,11 @@ export function Hero17({
           </motion.nav>
         )}
 
-        <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center px-6 pt-12 pb-10 text-center sm:px-10 sm:pt-16 lg:px-16">
+        <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center px-6 pt-12 pb-12 text-center sm:px-10 sm:pt-16 lg:px-16">
           <motion.div
             variants={heroDriftUpVariants}
-            className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50/90 px-3.5 py-1 text-xs font-semibold text-emerald-800 shadow-xs backdrop-blur-md dark:border-emerald-800/60 dark:bg-emerald-950/50 dark:text-emerald-300"
+            className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50/90 px-3.5 py-1 text-xs font-semibold text-emerald-800 shadow-xs backdrop-blur-md dark:border-emerald-800/60 dark:bg-emerald-950/50 dark:text-emerald-300"
           >
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             {eyebrow}
           </motion.div>
 
@@ -178,10 +176,9 @@ export function Hero17({
             </Link>
             <Link
               href={secondaryCtaHref}
-              className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white/80 px-6 text-sm font-semibold text-slate-800 shadow-xs backdrop-blur-xs transition-all hover:bg-slate-100 active:scale-95 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:hover:bg-slate-800"
+              className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 bg-white/80 px-6 text-sm font-semibold text-slate-800 shadow-xs backdrop-blur-xs transition-all hover:bg-slate-100 active:scale-95 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:hover:bg-slate-800"
             >
               {secondaryCtaLabel}
-              <Play className="h-3.5 w-3.5 fill-current opacity-70 transition-transform group-hover:scale-110" />
             </Link>
           </motion.div>
 
@@ -190,14 +187,6 @@ export function Hero17({
               {children}
             </motion.div>
           )}
-
-          <motion.div
-            variants={heroDriftUpVariants}
-            className="mt-auto flex flex-col items-center gap-2 pt-8 text-xs font-medium text-slate-500 dark:text-slate-400"
-          >
-            <ArrowDown className="h-4 w-4 animate-bounce" />
-            <span>{scrollLabel}</span>
-          </motion.div>
         </div>
       </motion.div>
     </section>

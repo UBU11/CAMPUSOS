@@ -14,7 +14,6 @@ export function HeroSection() {
       primaryCtaHref="/marketplace"
       secondaryCtaLabel="Post an Item"
       secondaryCtaHref="/sell"
-      scrollLabel="Scroll to Explore Listings"
     >
       <HeroTrustBadges />
     </Hero17>

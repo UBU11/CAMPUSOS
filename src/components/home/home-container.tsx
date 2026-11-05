@@ -3,7 +3,7 @@ import { HeroSection } from "@/components/home/hero-section";
 import { FilterBar } from "@/components/marketplace/filter-bar";
 import { LiveListingsGrid } from "@/components/marketplace/live-listings-grid";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export function HomeContainer() {
@@ -21,8 +21,7 @@ export function HomeContainer() {
                 <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
                   Live Campus Listings
                 </h2>
-                <span className="inline-flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
-                  <Sparkles className="h-3 w-3" />
+                <span className="inline-flex items-center rounded-md bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
                   Active Feed
                 </span>
               </div>

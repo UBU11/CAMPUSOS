@@ -1,5 +1,5 @@
 import type { HeroTrustBadgeItem } from "@/types/hero";
-import { CheckCircle2, type LucideIcon, ShieldCheck, Zap } from "lucide-react";
+import { CheckCircle2, IndianRupee, type LucideIcon, ShieldCheck } from "lucide-react";
 
 interface ConfiguredTrustBadge extends HeroTrustBadgeItem {
   icon: LucideIcon;
@@ -12,7 +12,7 @@ const trustItems: ConfiguredTrustBadge[] = [
     label: "@gecskp.ac.in Verified",
   },
   {
-    icon: Zap,
+    icon: IndianRupee,
     iconColor: "text-blue-600 dark:text-blue-400",
     label: "Rent in INR Daily",
   },
