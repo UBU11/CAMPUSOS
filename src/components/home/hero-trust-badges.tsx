@@ -31,7 +31,7 @@ export function HeroTrustBadges() {
         return (
           <div
             key={item.label}
-            className="flex items-center gap-1.5 rounded-full border border-slate-200/60 bg-white/60 px-3 py-1 shadow-2xs backdrop-blur-xs dark:border-slate-800/60 dark:bg-slate-900/60"
+            className="flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white/85 px-3 py-1 shadow-2xs dark:border-slate-800/80 dark:bg-slate-900/85"
           >
             <Icon className={`h-4 w-4 ${item.iconColor}`} />
             <span>{item.label}</span>

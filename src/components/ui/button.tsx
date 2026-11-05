@@ -4,10 +4,14 @@ import * as React from "react";
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
   size?: "default" | "sm" | "lg" | "icon";
+  asChild?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "default", size = "default", ...props }, ref) => {
+  (
+    { className, variant = "default", size = "default", asChild = false, children, ...props },
+    ref,
+  ) => {
     const baseStyles =
       "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer";
 
@@ -31,12 +35,19 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       icon: "h-9 w-9",
     };
 
+    const combinedClassName = cn(baseStyles, variantStyles[variant], sizeStyles[size], className);
+
+    if (asChild && React.isValidElement(children)) {
+      return React.cloneElement(children as React.ReactElement<{ className?: string }>, {
+        className: cn(combinedClassName, (children.props as { className?: string }).className),
+        ...props,
+      });
+    }
+
     return (
-      <button
-        ref={ref}
-        className={cn(baseStyles, variantStyles[variant], sizeStyles[size], className)}
-        {...props}
-      />
+      <button ref={ref} className={combinedClassName} {...props}>
+        {children}
+      </button>
     );
   },
 );

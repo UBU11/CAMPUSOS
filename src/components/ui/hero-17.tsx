@@ -9,8 +9,11 @@ import {
 } from "@/components/ui/hero-17-motion";
 import { cn } from "@/lib/utils";
 import type { Hero17Props, HeroNavLink } from "@/types/hero";
+import defaultHeroMobile from "@assets/images/hero-mobile.png";
+import defaultHeroDesktop from "@assets/images/hero.png";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 
 const defaultNavLinks: HeroNavLink[] = [
@@ -34,7 +37,7 @@ export function Hero17({
   headingLine1Prefix = "The Operating System for",
   headingHighlight = "Campus Life",
   headingLine2 = "Buy, Sell & Lend Essentials",
-  description = "Buy, sell, and lend campus essentials, discover verified internships, and showcase your student talent within your verified college community.",
+  description = "Buy, sell and lend campus essentials, discover verified internships and showcase your student talent within your verified college community",
   primaryCtaLabel = "Explore Marketplace",
   primaryCtaHref = "/marketplace",
   secondaryCtaLabel = "Post an Item",
@@ -43,9 +46,13 @@ export function Hero17({
   loginHref = "/auth",
   signupLabel = "Get Started",
   signupHref = "/auth",
-  backgroundImage = "https://assets.watermelon.sh/hero-17-bg.avif",
+  backgroundImage = defaultHeroDesktop,
+  mobileBackgroundImage = defaultHeroMobile,
   className,
   children,
+  backgroundRef,
+  contentRef,
+  vignetteRef,
 }: Hero17Props) {
   const line1Tokens = toWordTokens(headingLine1Prefix, "line1");
   const line2Tokens = toWordTokens(headingLine2, "line2");
@@ -53,25 +60,64 @@ export function Hero17({
   return (
     <section
       className={cn(
-        "relative isolate min-h-[600px] sm:min-h-[720px] w-full overflow-hidden text-slate-950 antialiased dark:text-white",
+        "relative isolate min-h-[580px] sm:min-h-[760px] w-full overflow-hidden text-slate-950 antialiased dark:text-white",
         className,
       )}
     >
       <motion.div
-        className="relative flex h-full min-h-[600px] sm:min-h-[720px] w-full flex-col overflow-hidden"
+        className="relative flex h-full min-h-[580px] sm:min-h-[760px] w-full flex-col overflow-hidden"
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        animate="visible"
         variants={heroSectionVariants}
       >
-        <motion.img
-          variants={heroImageVariants}
-          src={backgroundImage}
-          alt="Campus backdrop"
-          className="absolute inset-0 h-full w-full object-cover object-center"
-        />
+        {/* Background Images with crisp responsive switching */}
+        <div
+          ref={backgroundRef}
+          className="absolute -top-[10%] inset-x-0 h-[120%] w-full pointer-events-none select-none will-change-transform"
+        >
+          <motion.div variants={heroImageVariants} className="relative h-full w-full">
+            {/* Desktop Background Image (Hidden on mobile, visible from sm screen up) */}
+            <div
+              className={cn(
+                "relative h-full w-full",
+                mobileBackgroundImage ? "hidden sm:block" : "block",
+              )}
+            >
+              <Image
+                src={backgroundImage}
+                alt="Campus backdrop"
+                fill
+                priority
+                quality={90}
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+            </div>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60 dark:from-slate-950/60 dark:via-transparent dark:to-slate-950/70" />
+            {/* Mobile Background Image (Visible on mobile, hidden from sm screen up) */}
+            {mobileBackgroundImage && (
+              <div className="relative h-full w-full block sm:hidden">
+                <Image
+                  src={mobileBackgroundImage}
+                  alt="Campus backdrop mobile"
+                  fill
+                  priority
+                  quality={90}
+                  sizes="100vw"
+                  className="object-cover object-center"
+                />
+              </div>
+            )}
+          </motion.div>
+        </div>
+
+        {/* Responsive Contrast Overlay - anchored over the background image */}
+        <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-white/90 via-white/70 to-white/95 dark:from-slate-950/90 dark:via-slate-950/75 dark:to-slate-950/95" />
+
+        <div
+          ref={vignetteRef}
+          className="pointer-events-none absolute inset-0 z-[2] bg-slate-950/0 will-change-[opacity]"
+        />
 
         {showNav && (
           <motion.nav
@@ -114,13 +160,18 @@ export function Hero17({
           </motion.nav>
         )}
 
-        <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center px-6 pt-12 pb-12 text-center sm:px-10 sm:pt-16 lg:px-16">
-          <motion.div
-            variants={heroDriftUpVariants}
-            className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50/90 px-3.5 py-1 text-xs font-semibold text-emerald-800 shadow-xs backdrop-blur-md dark:border-emerald-800/60 dark:bg-emerald-950/50 dark:text-emerald-300"
-          >
-            {eyebrow}
-          </motion.div>
+        <div
+          ref={contentRef}
+          className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center px-4 pt-24 pb-16 text-center will-change-transform sm:px-10 sm:pt-26 sm:pb-18 lg:px-16 lg:pt-28 lg:pb-20"
+        >
+          {eyebrow && (
+            <motion.div
+              variants={heroDriftUpVariants}
+              className="inline-flex items-center rounded-full border border-emerald-300/80 bg-white/90 px-3.5 py-1 text-xs font-semibold text-emerald-800 shadow-xs dark:border-emerald-800/80 dark:bg-emerald-950/80 dark:text-emerald-300"
+            >
+              {eyebrow}
+            </motion.div>
+          )}
 
           <motion.h1
             variants={heroStaggerWordsVariants}
@@ -158,7 +209,7 @@ export function Hero17({
 
           <motion.p
             variants={heroDriftUpVariants}
-            className="mt-5 max-w-2xl text-base text-slate-600 sm:text-lg dark:text-slate-300"
+            className="mt-5 max-w-2xl text-base font-medium text-slate-700 sm:text-lg dark:text-slate-200"
           >
             {description}
           </motion.p>
@@ -176,7 +227,7 @@ export function Hero17({
             </Link>
             <Link
               href={secondaryCtaHref}
-              className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 bg-white/80 px-6 text-sm font-semibold text-slate-800 shadow-xs backdrop-blur-xs transition-all hover:bg-slate-100 active:scale-95 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:hover:bg-slate-800"
+              className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 bg-white/90 px-6 text-sm font-semibold text-slate-800 shadow-xs transition-all hover:bg-slate-100 hover:border-slate-400 active:scale-95 dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-200 dark:hover:bg-slate-800"
             >
               {secondaryCtaLabel}
             </Link>

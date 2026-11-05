@@ -1,5 +1,3 @@
-import { BottomNavBar } from "@/components/navigation/bottom-nav-bar";
-import { Navbar } from "@/components/navigation/navbar";
 import type { Metadata } from "next";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
@@ -16,15 +14,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-50">
-        <NuqsAdapter>
-          <div className="relative flex min-h-screen flex-col">
-            <Navbar />
-            <div className="flex-1 pb-20 md:pb-8">{children}</div>
-            <BottomNavBar />
-          </div>
-        </NuqsAdapter>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        suppressHydrationWarning
+        className="min-h-screen bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-50"
+      >
+        <NuqsAdapter>{children}</NuqsAdapter>
       </body>
     </html>
   );

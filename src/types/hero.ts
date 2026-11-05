@@ -1,4 +1,5 @@
-import type { ReactNode } from "react";
+import type { StaticImageData } from "next/image";
+import type { ReactNode, RefObject } from "react";
 
 export interface HeroNavLink {
   label: string;
@@ -27,7 +28,11 @@ export interface Hero17Props {
   loginHref?: string;
   signupLabel?: string;
   signupHref?: string;
-  backgroundImage?: string;
+  backgroundImage?: string | StaticImageData;
+  mobileBackgroundImage?: string | StaticImageData;
   className?: string;
   children?: ReactNode;
+  backgroundRef?: RefObject<HTMLDivElement | null>;
+  contentRef?: RefObject<HTMLDivElement | null>;
+  vignetteRef?: RefObject<HTMLDivElement | null>;
 }
